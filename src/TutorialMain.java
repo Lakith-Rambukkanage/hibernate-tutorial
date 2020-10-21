@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.iota.models.dto.Address;
 import org.iota.models.dto.UserDetails;
+import org.iota.models.dto.Vehicle;
 
 public class TutorialMain {
 	public static void main(String[] args) {
@@ -29,24 +30,29 @@ public class TutorialMain {
 		address2.setStreet("red street2");
 		address2.setZipcode("2222");
 
-		Address address3 = new Address();
-		address3.setCity("col3");
-		address3.setState("Western3");
-		address3.setStreet("red street3");
-		address3.setZipcode("3333");
-
 
 		userDetails.getAddresses().add(address1);
 		userDetails.getAddresses().add(address2);
-		userDetails.getAddresses().add(address3);
 
 
+		Vehicle vehicle1 = new Vehicle();
+		vehicle1.setVehicleType("Toyota");
+		vehicle1.setUserDetails(userDetails);
+
+		Vehicle vehicle2 = new Vehicle();
+		vehicle2.setVehicleType("Honda");
+		vehicle2.setUserDetails(userDetails);
+
+		userDetails.getVehicles().add(vehicle1);
+		userDetails.getVehicles().add(vehicle2);
 
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
 
 		session.beginTransaction();
 		session.save(userDetails);
+		session.save(vehicle1);
+		session.save(vehicle2);
 		session.getTransaction().commit();
 
 		session.close();
@@ -57,13 +63,14 @@ public class TutorialMain {
 		session.beginTransaction();
 
 		userDetails = session.get(UserDetails.class,1);
-		for (Address a : userDetails.getAddresses()) {
-			System.out.println(a.getZipcode());
-		}
-		System.out.println("done");
+
+//		for (Address a : userDetails.getAddresses()) {
+//			System.out.println(a.getZipcode());
+//		}
+
 		session.getTransaction().commit();
-		System.out.println("done");
 		session.close();
+
 
 	}
 

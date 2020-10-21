@@ -31,12 +31,13 @@
         <property name="show_sql">true</property>
 
         <!--         drop and re-create schema on startup-->
-        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
 
 
         <!--         Name the annotated entity classes-->
         <mapping class="org.iota.models.dto.UserDetails" />
+        <mapping class="org.iota.models.dto.Vehicle" />
 
 
 

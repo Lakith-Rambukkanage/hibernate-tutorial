@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,17 +27,33 @@ import org.hibernate.annotations.Type;
 public class UserDetails {
 	@Id	@GeneratedValue
 	private int userID;
+
 	private String userName;
+
 	@Temporal(TemporalType.DATE)
 	private Date joinedDate;
+
+	@OneToMany
+	@JoinTable(name = "USER_VEHICLE",joinColumns = @JoinColumn(name = "USER_ID"),inverseJoinColumns = @JoinColumn(name = "VEHICLE_ID"))
+	private Collection<Vehicle> vehicles = new ArrayList<Vehicle>();
+
+
+
 	private String description;
+
+
 	@ElementCollection
 	@JoinTable( name = "USER_ADDRESSES", joinColumns =@JoinColumn(name = "userID"))
 	@GenericGenerator(name = "sequence_gen",strategy = "sequence")
 	@CollectionId(columns ={@Column(name = "ADDRESS_ID")},generator ="sequence_gen",type =@Type(type = "long" ))
 	private Collection<Address> addresses = new ArrayList<Address>();
 
-	public Collection<Address> getAddresses() {return addresses;	}
+
+	public Collection<Vehicle> getVehicles() {return vehicles;}
+
+	public void setVehicles(Collection<Vehicle> vehicles) { this.vehicles = vehicles;}
+
+	public Collection<Address> getAddresses() {return addresses;}
 
 	public void setAddresses(Collection<Address> addresses) {this.addresses= addresses;	}
 
