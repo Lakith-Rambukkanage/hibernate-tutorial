@@ -1,12 +1,18 @@
 package org.iota.models.dto;
 
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@DiscriminatorColumn(name = "CLASS",discriminatorType = DiscriminatorType.STRING) // todo : when inheritance type is single table
 public class Vehicle {
 	@Id @GeneratedValue
 	private int vehicleID;

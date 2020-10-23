@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
@@ -33,7 +34,7 @@ public class UserDetails {
 	@Temporal(TemporalType.DATE)
 	private Date joinedDate;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "USER_VEHICLE",joinColumns = @JoinColumn(name = "USER_ID"),inverseJoinColumns = @JoinColumn(name = "VEHICLE_ID"))
 	private Collection<Vehicle> vehicles = new ArrayList<Vehicle>();
 

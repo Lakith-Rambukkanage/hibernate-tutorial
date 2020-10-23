@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.iota.models.dto.Address;
+import org.iota.models.dto.Bike;
+import org.iota.models.dto.Car;
 import org.iota.models.dto.UserDetails;
 import org.iota.models.dto.Vehicle;
 
@@ -35,13 +37,15 @@ public class TutorialMain {
 		userDetails.getAddresses().add(address2);
 
 
-		Vehicle vehicle1 = new Vehicle();
+		Car vehicle1 = new Car();
 		vehicle1.setVehicleType("Toyota");
 		vehicle1.setUserDetails(userDetails);
+		vehicle1.setCarType("Allion");
 
-		Vehicle vehicle2 = new Vehicle();
+		Bike vehicle2 = new Bike();
 		vehicle2.setVehicleType("Honda");
 		vehicle2.setUserDetails(userDetails);
+		vehicle2.setBikeBrand("CBR");
 
 		userDetails.getVehicles().add(vehicle1);
 		userDetails.getVehicles().add(vehicle2);
